@@ -175,6 +175,11 @@ unsetopt chase_links                    # "chase_dots"と同様の効果を".."�
 if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+if [ -f ~/dotfiles/.git-flow-completion.zsh ]; then
+    source ~/dotfiles/.git-flow-completion.zsh
+fi
+
 [ -f ~/.zshrc.group ] && source ~/.zshrc.group
 [ -f ~/.zshrc.user ] && source ~/.zshrc.user
 # }}}1
