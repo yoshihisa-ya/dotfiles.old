@@ -87,7 +87,7 @@ alias -s {gz,tgz,zip,bz2,tbz,tar}=extract
 autoload colors
 colors
 
-PROMPT="%{${fg[blue]}%}%n%# %{${reset_color}%}"
+PROMPT="%{${fg[cyan]}%}%n%# %{${reset_color}%}"
 [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
     PROMPT="%{${fg[blue]}%}[%n@%{${fg[red]}%}%M%{${fg[blue]}%}]%# %{${reset_color}%}"
 RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
