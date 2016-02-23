@@ -1,5 +1,4 @@
 # vim: set foldmethod=marker :
-# ----------------------------
 
 export TERM=screen-256color
 export PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
