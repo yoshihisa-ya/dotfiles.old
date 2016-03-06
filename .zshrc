@@ -54,12 +54,12 @@ zstyle ':completion:*:(less|rm|rmdir|cp|mv|vi|vim):*' ignore-line true
 # Alias {{{1
 # ----------
 alias vi='vim'
-alias ls="ls -G"
 alias grep="grep --color=auto"
 # alias less="/usr/share/vim/vim74/macros/less.sh"
 alias rm=" rm -iv"
 alias mv=" mv -iv"
 alias cp="cp -i"
+alias nssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"'
 
 alias -s py=python
 alias -s {png,jpg,bmp,PNG,JPG,BMP}=eog
