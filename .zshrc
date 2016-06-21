@@ -179,6 +179,11 @@ if [ -f ~/dotfiles/.git-flow-completion.zsh ]; then
     source ~/dotfiles/.git-flow-completion.zsh
 fi
 
+if [ `hostname` = "www1112.sakura.ne.jp" ]; then
+    alias tmux='export LD_LIBRARY_PATH=~/opt/libevent/lib && ~/opt/tmux/bin/tmux'
+    export MAILCHECK=0
+fi
+
 [ -f ~/.zshrc.group ] && source ~/.zshrc.group
 [ -f ~/.zshrc.user ] && source ~/.zshrc.user
 # }}}1
