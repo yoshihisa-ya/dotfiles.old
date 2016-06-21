@@ -5,5 +5,5 @@ if [ `hostname` = "www1112.sakura.ne.jp" ]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   export TMPDIR="$HOME/tmp"
   eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  # eval "$(pyenv virtualenv-init -)"
 fi
