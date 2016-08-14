@@ -184,6 +184,10 @@ if [ `hostname` = "www1112.sakura.ne.jp" ]; then
     export MAILCHECK=0
 fi
 
+if [ `hostname` = "dt" ]; then
+    PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+fi
+
 [ -f ~/.zshrc.group ] && source ~/.zshrc.group
 [ -f ~/.zshrc.user ] && source ~/.zshrc.user
 # }}}1
