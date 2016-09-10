@@ -202,7 +202,7 @@ set nocursorcolumn
 set cmdheight=2
 set laststatus=2
 let ff_type = {'dos' : 'CR+LF', 'unix' : 'LF', 'mac' : 'CR' }
-set statusline=%{g:buftabs_list}%=\ %m%r%h%w[%Y,%{ff_type[&ff]}(%{&ff})]\ [%{(&fenc!=''?&fenc:&enc)}]\ [%03l/%03L,%03c]\ [%02p%%]
+set statusline=%m%r%h%w[%Y,%{ff_type[&ff]}(%{&ff})]\ [%{(&fenc!=''?&fenc:&enc)}]\ [%03l/%03L,%03c]\ [%02p%%]
 
 set expandtab
 set tabstop=2
