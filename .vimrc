@@ -31,11 +31,6 @@ NeoBundle 'thinca/vim-visualstar'
 NeoBundle 'haya14busa/incsearch.vim'
 NeoBundle 'haya14busa/incsearch-fuzzy.vim'
 
-" TweetVim
-NeoBundle 'basyura/TweetVim'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'basyura/twibill.vim'
-
 " Indent
 " NeoBundle 'nathanaelkane/vim-indent-guides'
 
@@ -46,6 +41,10 @@ NeoBundle 'Align'
 NeoBundle 'buftabs'
 NeoBundle 'bufexplorer.zip'
 NeoBundle 'Shougo/vimfiler.vim'
+
+" Markdown
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 
 " Other
 NeoBundle 'Shougo/neocomplete.vim'
