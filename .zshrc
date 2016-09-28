@@ -192,3 +192,6 @@ fi
 [ -f ~/.zshrc.user ] && source ~/.zshrc.user
 # }}}1
 #
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
