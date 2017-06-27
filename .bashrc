@@ -5,7 +5,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+# Command Alias
+if [ $OSTYPE == 'linux-gnu' ]; then
+  alias ls='ls --color=auto'
+elif [ $OSTYPE == 'darwin16' ]; then
+  alias vi='/usr/local/bin/vim'
+  # Delete extra key bindings
+  stty discard undef
+fi
+
 PS1='[\u@\h \W]\$ '
 
 # ssh-agent
@@ -16,3 +24,7 @@ fi
 
 ## Automatically add key of ssh command
 ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+
+if [ -f ~/.bashrc_work ]; then
+  . ~/.bashrc_work
+fi
