@@ -56,6 +56,7 @@ NeoBundle 'localrc.vim'
 NeoBundle 'speeddating.vim'
 NeoBundle 'tComment'
 NeoBundle 'Toggle'
+NeoBundle 'scrooloose/syntastic'
 
 " NeoBundle 'camelcasemotion'
 " NeoBundle 'textobj-user'
@@ -173,6 +174,11 @@ augroup foldmethod
   autocmd BufRead,BufNewFile *.c,*.cpp,*.php,*.java setlocal foldmethod=syntax
   autocmd BufRead,BufNewFile *.py,*.rst setlocal foldmethod=indent
 augroup END
+
+" Syntax
+"" syntastic
+let g:syntastic_python_checkers = ["flake8"]
+let g:syntastic_python_flake8_args="--max-line-length=120"
 
 " プロジェクトに合わせてカレントディレクトリを変更
 augroup sotsukenProjroot
