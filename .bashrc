@@ -25,6 +25,10 @@ fi
 ## Automatically add key of ssh command
 ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
 
+if [ -f ~/.bashrc_private ]; then
+  . ~/.bashrc_private
+fi
+
 if [ -f ~/.bashrc_work ]; then
   . ~/.bashrc_work
 fi
