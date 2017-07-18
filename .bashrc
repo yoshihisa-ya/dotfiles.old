@@ -27,6 +27,9 @@ fi
 ## Automatically add key of ssh command
 ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
 
+# Alias
+alias notevim='mkdir -p ~/Documents/note/`date +%Y%m%d`; cd  ~/Documents/note/`date +%Y%m%d`; vim'
+
 if [ -f ~/.bashrc_private ]; then
   . ~/.bashrc_private
 fi

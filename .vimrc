@@ -147,6 +147,8 @@ map zg/ <Plug>(incsearch-fuzzy-stay)
 
 inoremap jj <ESC>
 
+colorscheme elflord
+
 " 行数とルーラーを表示
 set number
 set ruler
@@ -169,11 +171,11 @@ augroup phpsyntaxcheck
 augroup END
 
 " ファイルに応じて自動インデント
-augroup foldmethod
-  autocmd!
-  autocmd BufRead,BufNewFile *.c,*.cpp,*.php,*.java setlocal foldmethod=syntax
-  autocmd BufRead,BufNewFile *.py,*.rst setlocal foldmethod=indent
-augroup END
+" augroup foldmethod
+"   autocmd!
+"   autocmd BufRead,BufNewFile *.c,*.cpp,*.php,*.java setlocal foldmethod=syntax
+"   autocmd BufRead,BufNewFile *.py,*.rst setlocal foldmethod=indent
+" augroup END
 
 " Syntax
 "" syntastic
