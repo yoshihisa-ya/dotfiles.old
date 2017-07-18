@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+export VISUAL="vim"
+
 # Command Alias
 if [ $OSTYPE == 'linux-gnu' ]; then
   alias ls='ls --color=auto'
