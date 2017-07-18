@@ -169,11 +169,11 @@ augroup phpsyntaxcheck
 augroup END
 
 " ファイルに応じて自動インデント
-augroup foldmethod
-  autocmd!
-  autocmd BufRead,BufNewFile *.c,*.cpp,*.php,*.java setlocal foldmethod=syntax
-  autocmd BufRead,BufNewFile *.py,*.rst setlocal foldmethod=indent
-augroup END
+" augroup foldmethod
+"   autocmd!
+"   autocmd BufRead,BufNewFile *.c,*.cpp,*.php,*.java setlocal foldmethod=syntax
+"   autocmd BufRead,BufNewFile *.py,*.rst setlocal foldmethod=indent
+" augroup END
 
 " Syntax
 "" syntastic
