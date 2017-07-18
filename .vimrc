@@ -201,6 +201,9 @@ augroup END
 "   autocmd BufNewFile *.css 0r ~/.vim/template.css
 " augroup END
 
+" Git commit で差分を表示
+autocmd FileType gitcommit DiffGitCached | wincmd x | resize 10
+
 " 最後の編集位置にカーソルを復元
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
