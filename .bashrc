@@ -28,6 +28,10 @@ ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias 
 # Alias
 alias notevim='mkdir -p ~/Documents/note/`date +%Y%m%d`; cd  ~/Documents/note/`date +%Y%m%d`; vim'
 
+if [ -f ~/.bashrc_private ]; then
+  . ~/.bashrc_private
+fi
+
 if [ -f ~/.bashrc_work ]; then
   . ~/.bashrc_work
 fi
