@@ -147,6 +147,8 @@ map zg/ <Plug>(incsearch-fuzzy-stay)
 
 inoremap jj <ESC>
 
+colorscheme elflord
+
 " 行数とルーラーを表示
 set number
 set ruler
