@@ -57,6 +57,7 @@ NeoBundle 'speeddating.vim'
 NeoBundle 'tComment'
 NeoBundle 'Toggle'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'davidhalter/jedi-vim'
 
 " NeoBundle 'camelcasemotion'
 " NeoBundle 'textobj-user'
@@ -87,6 +88,17 @@ nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
 nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
+
+" jedi-vim
+autocmd FileType python setlocal omnifunc=jedi#completions
+
+let g:jedi#auto_vim_configuration = 0
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 " align
 let g:Align_xstrlen = 3
