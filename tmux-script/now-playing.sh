@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [ $OSTYPE == 'linux-gnu' ]; then
-  if [ -f /usr/bin/rhythmbox-client ]; then
+  if type "mpc" > /dev/null 2>&1; then
     echo -n ' '
-    rhythmbox-client --no-start --print-playing --print-playing-format='NowPlaying: %tt Singer: %ta'
+    mpc -f "NowPlaying: %title% Singer: %artist%" current
   fi
 fi
 
