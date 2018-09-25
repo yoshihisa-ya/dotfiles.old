@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+export PATH=~/bin:$PATH
+
 export VISUAL="vim"
 
 # Command Alias
