@@ -24,6 +24,7 @@ PS1='[\u@\h \W]\$ '
 
 export PAGER=less
 export LESS='-g -i -M -R -W -x2'
+export TERM=xterm-256color
 
 export ANSIBLE_NOCOWS=1
 
