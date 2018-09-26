@@ -58,6 +58,7 @@ NeoBundle 'tComment'
 NeoBundle 'Toggle'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'fatih/vim-go'
 
 " NeoBundle 'camelcasemotion'
 " NeoBundle 'textobj-user'
@@ -126,6 +127,13 @@ let g:neocomplete#enable_auto_select = 1
 " vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
+
+" vim-go
+let g:go_fmt_command = "goimports"
+set autowrite
+map <C-n> :cnext<CR>
+map <C-p> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 " }}}1
 
 
