@@ -5,7 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+export GOPATH=$HOME/dev
 export PATH=~/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
 
 export VISUAL="vim"
 
@@ -53,3 +55,11 @@ fi
 if [ -f ~/.bashrc_work ]; then
   . ~/.bashrc_work
 fi
+
+function repos() {
+  local repo=$(ghq list --full-path | peco --query "$LBUFFER")
+  if [ -n ${repo} ]; then
+    echo ${repo}
+    cd ${repo}
+  fi
+}
