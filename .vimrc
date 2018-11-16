@@ -134,6 +134,9 @@ set autowrite
 map <C-n> :cnext<CR>
 map <C-p> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
+
+" Gtags
+let Gtags_Auto_Map = 1
 " }}}1
 
 
