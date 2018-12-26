@@ -5,10 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-export GOPATH=$HOME/dev
-export PATH=~/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-
 export VISUAL="vim"
 
 # Command Alias
