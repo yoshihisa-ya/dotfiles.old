@@ -158,6 +158,12 @@ set autoindent
 set cindent
 set showmatch
 
+augroup foldmethod
+  autocmd!
+  autocmd FileType sh setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=0
+  autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=0
+augroup END
+
 
 " Search
 " ------------------------------
