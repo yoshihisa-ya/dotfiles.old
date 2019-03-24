@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := help
 
+SHELL = bash
+
 PACKAGE_LIST := packages.txt
 AUR_LIST     := aur.txt
 
@@ -34,12 +36,12 @@ packages: ### Install packages
 
 .PHONY: backup
 backup: ### Backup installed package to list
-	pacman -Qqen > ${PACKAGE_LIST}
+	comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) > ${PACKAGE_LIST}
 	pacman -Qqem > ${AUR_LIST}
 	@echo
 	@echo package list backup done.
 
 .PHONY: diff
 diff: ### Diff installed-packages, package-list
-	pacman -Qqen | diff ${PACKAGE_LIST} -
+	comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) | diff ${PACKAGE_LIST} - || :
 	pacman -Qqem | diff ${AUR_LIST} -
