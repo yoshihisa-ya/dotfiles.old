@@ -44,4 +44,4 @@ backup: ### Backup installed package to list
 .PHONY: diff
 diff: ### Diff installed-packages, package-list
 	comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) | diff ${PACKAGE_LIST} - || :
-	pacman -Qqem | diff ${AUR_LIST} -
+	pacman -Qqem | diff ${AUR_LIST} - || :
