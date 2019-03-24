@@ -29,17 +29,17 @@ dotfiles: ### Install dotfiles
 	test -f /usr/share/vim/vimfiles/plugin/gtags.vim && \
 		cp /usr/share/vim/vimfiles/plugin/gtags.vim ${HOME}/.vim/plugin/
 
-.PHONY: packages
-packages: ### Install packages
+.PHONY: install
+install: ### Install packages
 	sudo pacman -S --needed - < ${PACKAGE_LIST}
 	cat ${AUR_LIST} | xargs -n 1 yay -S --noconfirm --needed
 
-.PHONY: backup
-backup: ### Backup installed package to list
+.PHONY: list
+list: ### Make installed package list
 	comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) > ${PACKAGE_LIST}
 	pacman -Qqem > ${AUR_LIST}
 	@echo
-	@echo package list backup done.
+	@echo make package list done.
 
 .PHONY: diff
 diff: ### Diff installed-packages, package-list
