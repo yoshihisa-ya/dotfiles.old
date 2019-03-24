@@ -3,6 +3,9 @@
 PACKAGE_LIST := packages.txt
 AUR_LIST     := aur.txt
 
+EXCLUSIONS := .git .gitignore
+DOTFILES   := $(filter-out $(EXCLUSIONS), $(wildcard .??*))
+
 .PHONY: help
 help: ### Help
 	@echo "Please use 'make <target>' where <target> is one of"
@@ -15,12 +18,10 @@ deploy: packages dotfiles ### Deploy ArchLinux
 
 .PHONY: dotfiles
 dotfiles: ### Install dotfiles
-	ln -fsn ${PWD}/.vimrc ${HOME}/.vimrc
-	ln -fsn ${PWD}/.bashrc ${HOME}/.bashrc
-	ln -fsn ${PWD}/.bash_profile ${HOME}/.bash_profile
-	ln -fsn ${PWD}/.tmux.conf ${HOME}/.tmux.conf
+	@$(foreach dotfile, $(DOTFILES), ln -sfnv $(abspath $(dotfile)) $(HOME)/$(dotfile);)
 	test -f ${HOME}/.vim/autoload/plug.vim || \
-		curl -fLo ${HOME}/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		curl -fLo ${HOME}/.vim/autoload/plug.vim \
+		--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	test -d ${HOME}/.vim/plugin || \
 		mkdir -p ${HOME}/.vim/plugin
 	test -f /usr/share/vim/vimfiles/plugin/gtags.vim && \
