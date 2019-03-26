@@ -46,14 +46,6 @@ ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias 
 # Alias
 alias ssh-root='ssh -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q -l root'
 
-if [ -f ~/.bashrc_private ]; then
-  . ~/.bashrc_private
-fi
-
-if [ -f ~/.bashrc_work ]; then
-  . ~/.bashrc_work
-fi
-
 function repos() {
   local repo=$(ghq list --full-path | peco --query "$LBUFFER")
   if [ -n ${repo} ]; then
@@ -61,3 +53,11 @@ function repos() {
     cd ${repo}
   fi
 }
+
+if [ -f ~/.bashrc_private ]; then
+  . ~/.bashrc_private
+fi
+
+if [ -f ~/.bashrc_work ]; then
+  . ~/.bashrc_work
+fi
