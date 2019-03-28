@@ -47,6 +47,10 @@ ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias 
 alias ssh-root='ssh -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q -l root'
 alias n='mpc next'
 alias xclip='xclip -selection clipboard'
+windowid() {
+    xwininfo | awk '/Window id/{print$4}'
+}
+alias import-window="import -window \$(windowid)"
 
 function repos() {
     local repo=$(ghq list --full-path | peco --query "$LBUFFER")
