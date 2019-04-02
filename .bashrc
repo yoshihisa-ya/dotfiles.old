@@ -107,3 +107,16 @@ fi
 if [ -f ~/.bashrc_work ]; then
     . ~/.bashrc_work
 fi
+
+if [ -f ~/dotfiles/git/contrib/completion/git-completion.bash ]; then
+    . ~/dotfiles/git/contrib/completion/git-completion.bash
+fi
+
+if [ -f ~/dotfiles/git/contrib/completion/git-prompt.sh ]; then
+    . ~/dotfiles/git/contrib/completion/git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=true
+    GIT_PS1_SHOWUNTRACKEDFILES=true
+    GIT_PS1_SHOWSTASHSTATE=true
+    GIT_PS1_SHOWUPSTREAM=auto
+    PS1='[\u@\h \W]$(__git_ps1)\$ '
+fi
