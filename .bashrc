@@ -121,3 +121,7 @@ if [ -f ~/dotfiles/git/contrib/completion/git-prompt.sh ]; then
     GIT_PS1_SHOWUPSTREAM=auto
     PS1='[\u@\h \W]$(__git_ps1)\$ '
 fi
+
+if [ -f ~/dotfiles/mpc/contrib/mpc-completion.bash ]; then
+    . ~/dotfiles/mpc/contrib/mpc-completion.bash
+fi
