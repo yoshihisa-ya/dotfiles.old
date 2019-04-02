@@ -1,3 +1,6 @@
 [submodule "git"]
 	path = git
 	url = git://git.kernel.org/pub/scm/git/git.git
+[submodule "mpc"]
+	path = mpc
+	url = git@github.com:MusicPlayerDaemon/mpc.git
