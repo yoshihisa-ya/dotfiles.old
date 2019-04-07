@@ -109,12 +109,12 @@ if [ -f ~/.bashrc_work ]; then
     . ~/.bashrc_work
 fi
 
-if [ -f ~/dotfiles/git/contrib/completion/git-completion.bash ]; then
-    . ~/dotfiles/git/contrib/completion/git-completion.bash
+if [ -f /usr/share/git/completion/git-completion.bash ]; then
+    . /usr/share/git/completion/git-completion.bash
 fi
 
-if [ -f ~/dotfiles/git/contrib/completion/git-prompt.sh ]; then
-    . ~/dotfiles/git/contrib/completion/git-prompt.sh
+if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+    . /usr/share/git/completion/git-prompt.sh
     GIT_PS1_SHOWDIRTYSTATE=true
     GIT_PS1_SHOWUNTRACKEDFILES=true
     GIT_PS1_SHOWSTASHSTATE=true
@@ -122,6 +122,6 @@ if [ -f ~/dotfiles/git/contrib/completion/git-prompt.sh ]; then
     PS1='[\u@\h \W]$(__git_ps1)\$ '
 fi
 
-if [ -f ~/dotfiles/mpc/contrib/mpc-completion.bash ]; then
-    . ~/dotfiles/mpc/contrib/mpc-completion.bash
+if [ -f /usr/share/doc/mpc/contrib/mpc-completion.bash ]; then
+    . /usr/share/doc/mpc/contrib/mpc-completion.bash
 fi
