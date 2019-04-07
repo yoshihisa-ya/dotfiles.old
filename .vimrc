@@ -33,6 +33,7 @@ Plug 'vim-jp/vimdoc-ja'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'Rykka/riv.vim'
 
 call plug#end()
 
