@@ -2,8 +2,10 @@
 
 SHELL = bash
 
-PACKAGE_LIST := packages.txt
-AUR_LIST     := aur.txt
+HOSTNAME := $(shell hostname)
+
+PACKAGE_LIST := ~/sync/dotfiles/list/$(HOSTNAME)_packages.txt
+AUR_LIST     := ~/sync/dotfiles/list/$(HOSTNAME)_aur.txt
 
 EXCLUSIONS := .git .gitignore
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(wildcard .??*))
