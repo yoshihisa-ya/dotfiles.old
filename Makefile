@@ -23,6 +23,8 @@ deploy: install dotfiles ### Deploy ArchLinux
 .PHONY: dotfiles
 dotfiles: ### Install dotfiles
 	@$(foreach dotfile, $(DOTFILES), ln -sfnv $(abspath $(dotfile)) $(HOME)/$(dotfile);)
+	test -f ${HOME}/sync/dotfiles/.gitconfig.$(HOSTNAME) && \
+		ln -sfnv ${HOME}/sync/dotfiles/.gitconfig.$(HOSTNAME) ${HOME}/.gitconfig || :
 	test -f ${HOME}/.vim/autoload/plug.vim || \
 		curl -fLo ${HOME}/.vim/autoload/plug.vim \
 		--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
