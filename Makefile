@@ -30,6 +30,9 @@ dotfiles: ### Install dotfiles
 		mkdir -p ${HOME}/.vim/plugin
 	test -f /usr/share/vim/vimfiles/plugin/gtags.vim && \
 		cp /usr/share/vim/vimfiles/plugin/gtags.vim ${HOME}/.vim/plugin/
+	test -d ${HOME}/.config || mkdir -m 755 ${HOME}/.config
+	test -d ${HOME}/.config/i3 || mkdir -m 750 ${HOME}/.config/i3
+	ln -sfnv $(abspath config/i3/config) ${HOME}/.config/i3/config
 
 .PHONY: install
 install: ### Install packages
