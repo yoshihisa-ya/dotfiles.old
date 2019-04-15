@@ -170,7 +170,3 @@ bar {
 }
 
 bindsym $mod+q exec --no-startup-id xscreensaver-command --lock
-
-# workspace "1" output DVI-D-0
-# workspace "2" output DVI-D-1
-# workspace "9" output HDMI-0
