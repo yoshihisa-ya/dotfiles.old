@@ -36,8 +36,11 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 # ssh-agent
 ## AutoStart
-if [[ -e $XDG_RUNTIME_DIR/ssh-agent.socket ]]; then
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+if ! pgrep -u $USER ssh-agent >/dev/null; then
+    ssh-agent >~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval $(<~/.ssh-agent-thing) >/dev/null
 fi
 
 ## Automatically add key of ssh command
