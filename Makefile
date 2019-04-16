@@ -57,3 +57,7 @@ list: ### Make installed package list
 diff: ### Diff installed-packages, package-list
 	@comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) | diff ${PACKAGE_LIST} - || :
 	@pacman -Qqem | diff ${AUR_LIST} - || :
+
+.PHONY: shfmt
+shfmt: ### Install shfmt
+	cd $(shell mktemp -d); go mod init tmp; go get mvdan.cc/sh/cmd/shfmt
