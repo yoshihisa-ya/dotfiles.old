@@ -66,3 +66,8 @@ shfmt: ### Install shfmt
 yay: ### Install yay
 	sudo pacman -S --needed --noconfirm git go
 	cd $(shell mktemp -d); git clone https://aur.archlinux.org/yay.git; cd yay; type yay || makepkg -si --noconfirm
+
+.PHONY: unison
+unison: ### Install unison
+	sudo pacman -S --needed --noconfirm git go
+	type unison || sudo pacman -S --needed --noconfirm unison
