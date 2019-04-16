@@ -61,3 +61,8 @@ diff: ### Diff installed-packages, package-list
 .PHONY: shfmt
 shfmt: ### Install shfmt
 	cd $(shell mktemp -d); go mod init tmp; go get mvdan.cc/sh/cmd/shfmt
+
+.PHONY: yay
+yay: ### Install yay
+	sudo pacman -S --needed --noconfirm git go
+	cd $(shell mktemp -d); git clone https://aur.archlinux.org/yay.git; cd yay; type yay || makepkg -si --noconfirm
