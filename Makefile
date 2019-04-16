@@ -19,6 +19,9 @@ help: ### Help
 
 .PHONY: pre-deploy
 pre-deploy: yay unison ### Pre Deploy ArchLinux
+	@echo
+	@echo "Plese create ~/.unison/sync.prf and run unison sync"
+	@echo "Next step make deploy"
 
 .PHONY: deploy
 deploy: install dotfiles shfmt ### Deploy ArchLinux
@@ -43,6 +46,8 @@ dotfiles: ### Install dotfiles
 	ln -sfnv $(abspath config/fcitx/config) ${HOME}/.config/fcitx/config
 	ln -sfnv $(abspath config/fcitx/conf/fcitx-keyboard.config) ${HOME}/.config/fcitx/conf/fcitx-keyboard.config
 	ln -sfnv $(abspath config/fcitx/conf/fcitx-classic-ui.config) ${HOME}/.config/fcitx/conf/fcitx-classic-ui.config
+	@echo
+	@echo "Deploy complete!"
 
 .PHONY: install
 install: ### Install packages
