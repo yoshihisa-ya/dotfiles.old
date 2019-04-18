@@ -46,4 +46,5 @@ if [ -f "$HOME/sync/dotfiles/config/i3/config.$HOSTNAME" ]; then
     cat $HOME/sync/dotfiles/config/i3/config.$HOSTNAME >>$HOME/.config/i3/config
 fi
 [ ! -s ~/.mpd/pid ] && type mpd >/dev/null 2>&1 && mpd
+type xbindkeys >/dev/null 2>&1 && xbindkeys &
 exec i3
