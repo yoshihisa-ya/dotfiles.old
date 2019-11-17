@@ -2,7 +2,7 @@
 
 SHELL = bash
 
-HOSTNAME := $(shell hostname)
+HOSTNAME := $(shell hostname -f)
 
 PACKAGE_LIST := ~/sync/dotfiles/list/$(HOSTNAME)_packages.txt
 AUR_LIST     := ~/sync/dotfiles/list/$(HOSTNAME)_aur.txt
