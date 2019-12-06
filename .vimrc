@@ -7,13 +7,14 @@ Plug 'kannokanno/previm'
 Plug 'tyru/open-browser.vim'
 
 " Golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " LSP
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'natebosch/vim-lsc'
 
 " Bash
 Plug 'vim-scripts/sh.vim'
@@ -38,6 +39,7 @@ Plug 'skanehira/translate.vim'
 
 call plug#end()
 
+let mapleader=","
 
 " Plugin Setting
 " ------------------------------
@@ -47,8 +49,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
 " vim-go
-let g:go_fmt_command = "goimports"
-set autowrite
+" let g:go_fmt_command = "goimports"
+" let g:go_def_mapping_enabled = 0
+" let g:go_doc_keywordprg_enabled = 0
+" let g:lsp_async_completion = 1
+" set autowrite
 map <C-n> :cnext<CR>
 map <C-p> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
@@ -58,6 +63,7 @@ if executable('gopls')
         \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
         \ 'whitelist': ['go'],
         \ })
+  autocmd BufWritePre *.go "LspDocumentFormatSync<CR>"
 endif
 
 " Gtags
@@ -80,8 +86,6 @@ syntax enable
 
 set title
 " set modeline
-
-let mapleader=","
 
 set cursorline
 set nocursorcolumn
