@@ -36,6 +36,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'Rykka/riv.vim'
 Plug 'skanehira/translate.vim'
+Plug 'fuenor/JpFormat.vim'
 
 call plug#end()
 
