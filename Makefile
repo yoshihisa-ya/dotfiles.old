@@ -4,8 +4,12 @@ SHELL = bash
 
 HOSTNAME := $(shell hostname -f)
 
-PACKAGE_LIST := ~/sync/dotfiles/list/$(HOSTNAME)_packages.txt
-AUR_LIST     := ~/sync/dotfiles/list/$(HOSTNAME)_aur.txt
+BASE_PACKAGE_LIST := ~/sync/dotfiles/list/packages.txt
+BASE_AUR_LIST     := ~/sync/dotfiles/list/aur.txt
+DESKTOP_PACKAGE_LIST := ~/sync/dotfiles/list/desktop_packages.txt
+DESKTOP_AUR_LIST     := ~/sync/dotfiles/list/desktop_aur.txt
+HOST_PACKAGE_LIST := ~/sync/dotfiles/list/$(HOSTNAME)_packages.txt
+HOST_AUR_LIST     := ~/sync/dotfiles/list/$(HOSTNAME)_aur.txt
 
 EXCLUSIONS := .git .gitignore
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(wildcard .??*))
@@ -51,20 +55,28 @@ dotfiles: ### Install dotfiles
 
 .PHONY: install
 install: ### Install packages
-	sudo pacman -S --needed - < ${PACKAGE_LIST}
-	cat ${AUR_LIST} | xargs -n 1 yay -S --noconfirm --needed
+	@test -f ${HOME}/.desktop && \
+		sudo pacman -S --needed - <(cat ${BASE_PACKAGE_LIST} ${DESKTOP_PACKAGE_LIST} ${HOST_PACKAGE_LIST} | sort | uniq) || \
+		sudo pacman -S --needed - <(cat ${BASE_PACKAGE_LIST} ${HOST_PACKAGE_LIST} | sort | uniq)
+	@test -f ${HOME}/.desktop && \
+		cat ${BASE_AUR_LIST} ${DESKTOP_AUR_LIST} ${HOST_AUR_LIST} | sort | uniq | xargs -n 1 yay -S --noconfirm --needed || \
+		cat ${BASE_AUR_LIST} ${HOST_AUR_LIST} | sort | uniq | xargs -n 1 yay -S --noconfirm --needed
 
 .PHONY: list
 list: ### Make installed package list
-	comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) > ${PACKAGE_LIST}
-	pacman -Qqem > ${AUR_LIST}
+	pacman -Qeqn | sort  > ${HOST_PACKAGE_LIST}
+	pacman -Qqem > ${HOST_AUR_LIST}
 	@echo
 	@echo make package list done.
 
 .PHONY: diff
 diff: ### Diff installed-packages, package-list
-	@comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) | diff ${PACKAGE_LIST} - || :
-	@pacman -Qqem | diff ${AUR_LIST} - || :
+	@test -f ${HOME}/.desktop && \
+		pacman -Qeqn | sort | diff <(cat ${BASE_PACKAGE_LIST} ${DESKTOP_PACKAGE_LIST} ${HOST_PACKAGE_LIST} | sort | uniq) - || : || \
+		pacman -Qeqn | sort | diff <(cat ${BASE_PACKAGE_LIST} ${HOST_PACKAGE_LIST} | sort | uniq) - || :
+	@test -f ${HOME}/.desktop && \
+		pacman -Qqem | sort | diff <(cat ${BASE_AUR_LIST} ${HOST_AUR_LIST} ${DESKTOP_AUR_LIST} | sort | uniq) - || : || \
+		pacman -Qqem | sort | diff <(cat ${BASE_AUR_LIST} ${HOST_AUR_LIST} | sort | uniq) - || :
 
 .PHONY: shfmt
 shfmt: ### Install shfmt
@@ -73,8 +85,8 @@ shfmt: ### Install shfmt
 .PHONY: yay
 yay: ### Install yay
 	sudo pacman -S --needed --noconfirm git go
-	cd $(shell mktemp -d); git clone https://aur.archlinux.org/yay.git; cd yay; type yay || makepkg -si --noconfirm
+	cd $(shell mktemp -d); git clone https://aur.archlinux.org/yay.git; cd yay; type yay > /dev/null || makepkg -si --noconfirm
 
 .PHONY: unison
 unison: ### Install unison
-	type unison || sudo pacman -S --needed --noconfirm unison
+	type unison > /dev/null || sudo pacman -S --needed --noconfirm unison
