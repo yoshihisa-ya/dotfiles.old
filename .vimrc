@@ -8,6 +8,7 @@ Plug 'tyru/open-browser.vim'
 
 " Golang
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mattn/vim-goimports'
 
 " LSP
 Plug 'prabirshrestha/async.vim'
@@ -51,10 +52,11 @@ let g:indent_guides_guide_size = 1
 
 " vim-go
 " let g:go_fmt_command = "goimports"
+" let g:go_fmt_autosave = 1
 " let g:go_def_mapping_enabled = 0
 " let g:go_doc_keywordprg_enabled = 0
 " let g:lsp_async_completion = 1
-" set autowrite
+set autowrite
 map <C-n> :cnext<CR>
 map <C-p> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
@@ -78,6 +80,8 @@ let g:shfmt_fmt_on_save = 1
 map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 map zg/ <Plug>(incsearch-fuzzy-stay)
+
+let g:lsp_diagnostics_echo_cursor = 1
 
 
 " Basic
