@@ -20,8 +20,10 @@ help: ### Help
 .PHONY: pre-deploy
 pre-deploy: yay unison ### Pre Deploy ArchLinux
 	@echo
+	@echo "$ vi ~/.unison/sync.prf"
 	@echo "Plese create ~/.unison/sync.prf and run unison sync"
-	@echo "Next step make deploy"
+	@echo "$ unison sync"
+	@echo "$ make deploy"
 
 .PHONY: deploy
 deploy: install dotfiles shfmt ### Deploy ArchLinux
