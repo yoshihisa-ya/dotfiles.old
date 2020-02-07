@@ -26,13 +26,14 @@ pre-deploy: yay unison ### Pre Deploy ArchLinux
 	@echo "$ make deploy"
 
 .PHONY: deploy
-deploy: install dotfiles shfmt ### Deploy ArchLinux
+deploy: install dotfiles shfmt ghq ### Deploy ArchLinux
 	@echo
 	@echo "Deploy complete!"
 
 .PHONY: dotfiles
 dotfiles: ### Install dotfiles
 	@$(foreach dotfile, $(DOTFILES), ln -sfnv $(abspath $(dotfile)) $(HOME)/$(dotfile);)
+	source ~/.bash_profile
 	test -f ${HOME}/sync/dotfiles/.gitconfig.$(HOSTNAME) && \
 		ln -sfnv ${HOME}/sync/dotfiles/.gitconfig.$(HOSTNAME) ${HOME}/.gitconfig || :
 	test -f ${HOME}/.vim/autoload/plug.vim || \
@@ -71,6 +72,10 @@ diff: ### Diff installed-packages, package-list
 .PHONY: shfmt
 shfmt: ### Install shfmt
 	cd $(shell mktemp -d); go mod init tmp; go get mvdan.cc/sh/cmd/shfmt
+
+.PHONY: ghq
+ghq: ### Install ghq
+	cd $(shell mktemp -d); go mod init tmp; go get github.com/x-motemen/ghq
 
 .PHONY: yay
 yay: ### Install yay
