@@ -71,6 +71,8 @@ diff: ### Diff installed-packages, package-list
 
 .PHONY: gotools
 gotools: ### Install go tools
+	cd $(shell mktemp -d); go mod init tmp; go get golang.org/x/tools/cmd/...
+	cd $(shell mktemp -d); go mod init tmp; go get golang.org/x/tools/gopls
 	cd $(shell mktemp -d); go mod init tmp; go get mvdan.cc/sh/cmd/shfmt
 	cd $(shell mktemp -d); go mod init tmp; go get github.com/x-motemen/ghq
 	cd $(shell mktemp -d); go mod init tmp; go get github.com/peco/peco/cmd/peco
