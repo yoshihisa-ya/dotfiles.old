@@ -26,7 +26,7 @@ pre-deploy: yay unison ### Pre Deploy ArchLinux
 	@echo "$ make deploy"
 
 .PHONY: deploy
-deploy: install dotfiles shfmt ghq ### Deploy ArchLinux
+deploy: install dotfiles gotools ### Deploy ArchLinux
 	@echo
 	@echo "Deploy complete!"
 
@@ -69,13 +69,11 @@ diff: ### Diff installed-packages, package-list
 	@comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) | diff ${PACKAGE_LIST} - || :
 	@pacman -Qqem | diff ${AUR_LIST} - || :
 
-.PHONY: shfmt
-shfmt: ### Install shfmt
+.PHONY: gotools
+gotools: ### Install go tools
 	cd $(shell mktemp -d); go mod init tmp; go get mvdan.cc/sh/cmd/shfmt
-
-.PHONY: ghq
-ghq: ### Install ghq
 	cd $(shell mktemp -d); go mod init tmp; go get github.com/x-motemen/ghq
+	cd $(shell mktemp -d); go mod init tmp; go get github.com/peco/peco
 
 .PHONY: yay
 yay: ### Install yay
