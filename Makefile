@@ -76,6 +76,7 @@ gotools: ### Install go tools
 	cd $(shell mktemp -d); go mod init tmp; go get mvdan.cc/sh/cmd/shfmt
 	cd $(shell mktemp -d); go mod init tmp; go get github.com/x-motemen/ghq
 	cd $(shell mktemp -d); go mod init tmp; go get github.com/peco/peco/cmd/peco
+	cd $(shell mktemp -d); go mod init tmp; go get github.com/drone/drone-cli/drone
 
 .PHONY: yay
 yay: ### Install yay
