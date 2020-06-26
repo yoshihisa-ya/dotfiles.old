@@ -34,17 +34,11 @@ export LESS_TERMCAP_so=$'\E[00;47;30m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# ssh-agent
-## AutoStart
-if ! pgrep -u $USER ssh-agent >/dev/null; then
-    ssh-agent >~/.ssh-agent-thing
+# gpg-agent
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
-if [[ "$SSH_AGENT_PID" == "" ]]; then
-    eval $(<~/.ssh-agent-thing) >/dev/null
-fi
-
-## Automatically add key of ssh command
-ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
 
 # Alias
 alias ssh-root='ssh -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q -l root'
