@@ -51,6 +51,14 @@ let mapleader=","
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 
+" vim-lsp
+nmap <silent> <Leader>d :LspDefinition<CR>
+nmap <silent> <Leader>p :LspHover<CR>
+nmap <silent> <Leader>r :LspReferences<CR>
+nmap <silent> <Leader>i :LspImplementation<CR>
+nmap <silent> <Leader>s :split \| :LspDefinition <CR>
+nmap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
+
 " vim-go
 " let g:go_fmt_command = "goimports"
 " let g:go_fmt_autosave = 1
