@@ -27,7 +27,7 @@ TriggerKey=CTRL_SPACE ALT_`
 # Super+Right Ctrl
 # Disabled
 # Custom
-#SwitchKey=L_SHIFT
+SwitchKey=Disabled
 # カスタム切り替えキー
 #CustomSwitchKey=
 # 入力メソッドをオンに
