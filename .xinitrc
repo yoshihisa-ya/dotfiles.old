@@ -47,4 +47,6 @@ if [ -f "$HOME/sync/dotfiles/config/i3/config.$HOSTNAME" ]; then
 fi
 [ ! -s ~/.mpd/pid ] && type mpd >/dev/null 2>&1 && mpd
 type xbindkeys >/dev/null 2>&1 && xbindkeys &
+type nm-applet >/dev/null 2>&1 && nm-applet &
+type blueman-applet >/dev/null 2>&1 && blueman-applet &
 exec i3
