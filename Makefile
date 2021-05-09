@@ -59,14 +59,14 @@ install: ### Install packages
 
 .PHONY: list
 list: ### Make installed package list
-	comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) > ${PACKAGE_LIST}
+	comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base-devel | sort) > ${PACKAGE_LIST}
 	pacman -Qqem > ${AUR_LIST}
 	@echo
 	@echo make package list done.
 
 .PHONY: diff
 diff: ### Diff installed-packages, package-list
-	@comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base base-devel | sort) | diff ${PACKAGE_LIST} - || :
+	@comm -23 <(pacman -Qeqn | sort) <(pacman -Qgq base-devel | sort) | diff ${PACKAGE_LIST} - || :
 	@pacman -Qqem | diff ${AUR_LIST} - || :
 
 .PHONY: gotools
