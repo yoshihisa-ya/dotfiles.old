@@ -41,6 +41,7 @@ dotfiles: ### Install dotfiles
 		--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	test -d ${HOME}/.vim/plugin || \
 		mkdir -p ${HOME}/.vim/plugin
+	test -d ${HOME}/.obj || mkdir -m 755 ${HOME}/.obj
 	test -f /usr/share/vim/vimfiles/plugin/gtags.vim && \
 		cp /usr/share/vim/vimfiles/plugin/gtags.vim ${HOME}/.vim/plugin/
 	test -d ${HOME}/.config || mkdir -m 755 ${HOME}/.config
