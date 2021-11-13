@@ -7,7 +7,7 @@ HOSTNAME := $(shell hostname -f)
 PACKAGE_LIST := ~/sync/dotfiles/list/$(HOSTNAME)_packages.txt
 AUR_LIST     := ~/sync/dotfiles/list/$(HOSTNAME)_aur.txt
 
-EXCLUSIONS := .git .gitignore
+EXCLUSIONS := .git .gitignore .xinitrc
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(wildcard .??*))
 
 .PHONY: help
