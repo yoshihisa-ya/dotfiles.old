@@ -42,8 +42,8 @@ dotfiles: ### Install dotfiles
 	test -d ${HOME}/.vim/plugin || \
 		mkdir -p ${HOME}/.vim/plugin
 	test -d ${HOME}/.obj || mkdir -m 755 ${HOME}/.obj
-	test -f /usr/share/vim/vimfiles/plugin/gtags.vim && \
-		cp /usr/share/vim/vimfiles/plugin/gtags.vim ${HOME}/.vim/plugin/
+	test -f /usr/share/vim/addons/plugin/gtags.vim && \
+		cp /usr/share/vim/addons/plugin/gtags.vim ${HOME}/.vim/plugin/
 	test -d ${HOME}/.config || mkdir -m 755 ${HOME}/.config
 	test -d ${HOME}/.config/i3 || mkdir -m 750 ${HOME}/.config/i3
 	test -d ${HOME}/.config/fcitx || mkdir -m 750 ${HOME}/.config/fcitx
