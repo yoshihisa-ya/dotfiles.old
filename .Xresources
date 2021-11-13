@@ -1,3 +1,4 @@
+Xft.dpi: 144
 xterm*locale: true
 xterm*faceName: DejaVu Sans Mono:style=Book:antialias=true
 xterm*faceNameDoublesize: IPAPGothic:style=Regular
