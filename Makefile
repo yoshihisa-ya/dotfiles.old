@@ -48,7 +48,7 @@ dotfiles: ### Install dotfiles
 	test -d ${HOME}/.config/i3 || mkdir -m 750 ${HOME}/.config/i3
 	test -d ${HOME}/.config/fcitx || mkdir -m 750 ${HOME}/.config/fcitx
 	test -d ${HOME}/.config/fcitx/conf || mkdir -m 700 ${HOME}/.config/fcitx/conf
-	ln -sfnv $(abspath config/i3/config.base) ${HOME}/.config/i3/config.base
+	ln -sfnv $(abspath config/i3/config) ${HOME}/.config/i3/config
 	ln -sfnv $(abspath config/fcitx/config) ${HOME}/.config/fcitx/config
 	ln -sfnv $(abspath config/fcitx/conf/fcitx-keyboard.config) ${HOME}/.config/fcitx/conf/fcitx-keyboard.config
 	ln -sfnv $(abspath config/fcitx/conf/fcitx-classic-ui.config) ${HOME}/.config/fcitx/conf/fcitx-classic-ui.config

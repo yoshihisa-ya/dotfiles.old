@@ -169,4 +169,19 @@ bar {
         status_command i3status
 }
 
-bindsym $mod+q exec --no-startup-id xscreensaver-command --lock
+bindsym $mod+q exec --no-startup-id i3lock -c 000000
+
+bindsym XF86MonBrightnessDown exec sudo light -s sysfs/backlight/intel_backlight -U 5
+bindsym XF86MonBrightnessUp exec sudo light -s sysfs/backlight/intel_backlight -A 5
+bindsym XF86KbdBrightnessUp exec sudo light -s sysfs/leds/smc::kbd_backlight -A 10
+bindsym XF86KbdBrightnessDown exec sudo light -s sysfs/leds/smc::kbd_backlight -U 10
+bindsym XF87AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec xautolock -detectsleep -time 5 -locker "i3lock -c 000000"
