@@ -39,6 +39,9 @@ dotfiles: ### Install dotfiles
 	test -f ${HOME}/.vim/autoload/plug.vim || \
 		curl -fLo ${HOME}/.vim/autoload/plug.vim \
 		--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	test -f "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim || \
+		curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	test -d ${HOME}/.vim/plugin || \
 		mkdir -p ${HOME}/.vim/plugin
 	test -d ${HOME}/.obj || mkdir -m 755 ${HOME}/.obj

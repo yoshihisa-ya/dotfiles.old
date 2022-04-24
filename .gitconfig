@@ -5,3 +5,5 @@
 	root = /home/yoshihisa/dev/src
 [pager]
 	branch = cat
+[pull]
+	ff = only

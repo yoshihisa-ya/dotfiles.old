@@ -25,6 +25,8 @@ export MAKEOBJDIRPREFIX=$HOME/.obj
 
 export ANSIBLE_NOCOWS=1
 
+export BR2_DL_DIR=~/buildroot/download
+
 # Add color to the display of man
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -45,6 +47,7 @@ alias ssh-root='ssh -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/nu
 alias n='mpc next'
 alias p='mpc pause'
 alias xclip='xclip -selection clipboard'
+alias cp='cp --reflink=auto'
 windowid() {
     xwininfo | awk '/Window id/{print$4}'
 }
@@ -117,6 +120,14 @@ if [ -f /usr/share/git/completion/git-prompt.sh ]; then
     GIT_PS1_SHOWSTASHSTATE=true
     GIT_PS1_SHOWUPSTREAM=auto
     PS1='[\u@\h \W]$(__git_ps1)\$ '
+fi
+
+if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
+    . /usr/share/doc/fzf/examples/key-bindings.bash
+fi
+
+if [ -f /usr/share/doc/fzf/examples/completion.bash ]; then
+    . /usr/share/doc/fzf/examples/completion.bash
 fi
 
 if [ -f /usr/share/doc/mpc/contrib/mpc-completion.bash ]; then
