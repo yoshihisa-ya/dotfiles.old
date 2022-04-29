@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -171,6 +171,12 @@ bindsym $mod+r mode "resize"
 #        tray_output       none
 #}
 
+gaps top 5
+gaps bottom 5
+gaps right 5
+gaps left 5
+gaps inner 5
+
 bindsym $mod+q exec --no-startup-id i3lock -c 000000
 
 bindsym XF86MonBrightnessDown exec sudo light -s sysfs/backlight/intel_backlight -U 5
@@ -184,8 +190,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 
-exec --no-startup-id nm-applet
-exec --no-startup-id blueman-applet
 exec --no-startup-id redshift-gtk -l 35.650583:139.540667
 exec --no-startup-id "sh -c 'sleep 1; exec bash ~/Sync/screenlayout/dual.sh'"
 exec --no-startup-id "sh -c 'sleep 2; exec bash ~/.config/polybar/launch.sh'"

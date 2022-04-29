@@ -7,7 +7,7 @@ HOSTNAME := $(shell hostname -f)
 PACKAGE_LIST := ~/sync/dotfiles/list/$(HOSTNAME)_packages.txt
 AUR_LIST     := ~/sync/dotfiles/list/$(HOSTNAME)_aur.txt
 
-EXCLUSIONS := .git .gitignore .xinitrc
+EXCLUSIONS := .git .gitignore
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(wildcard .??*))
 
 .PHONY: help
@@ -36,25 +36,16 @@ dotfiles: ### Install dotfiles
 	source ~/.bash_profile
 	test -f ${HOME}/sync/dotfiles/.gitconfig.$(HOSTNAME) && \
 		ln -sfnv ${HOME}/sync/dotfiles/.gitconfig.$(HOSTNAME) ${HOME}/.gitconfig || :
-	test -f ${HOME}/.vim/autoload/plug.vim || \
-		curl -fLo ${HOME}/.vim/autoload/plug.vim \
-		--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	test -f "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim || \
-		curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+	test -f ${HOME}/.local/share/nvim/site/autoload/plug.vim || \
+		curl -fLo ${HOME}/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	test -d ${HOME}/.vim/plugin || \
-		mkdir -p ${HOME}/.vim/plugin
 	test -d ${HOME}/.obj || mkdir -m 755 ${HOME}/.obj
-	test -f /usr/share/vim/addons/plugin/gtags.vim && \
-		cp /usr/share/vim/addons/plugin/gtags.vim ${HOME}/.vim/plugin/
 	test -d ${HOME}/.config || mkdir -m 755 ${HOME}/.config
 	test -d ${HOME}/.config/i3 || mkdir -m 750 ${HOME}/.config/i3
-	test -d ${HOME}/.config/fcitx || mkdir -m 750 ${HOME}/.config/fcitx
-	test -d ${HOME}/.config/fcitx/conf || mkdir -m 700 ${HOME}/.config/fcitx/conf
+	test -d ${HOME}/.config/nvim || mkdir -m 750 ${HOME}/.config/nvim
 	ln -sfnv $(abspath config/i3/config) ${HOME}/.config/i3/config
-	ln -sfnv $(abspath config/fcitx/config) ${HOME}/.config/fcitx/config
-	ln -sfnv $(abspath config/fcitx/conf/fcitx-keyboard.config) ${HOME}/.config/fcitx/conf/fcitx-keyboard.config
-	ln -sfnv $(abspath config/fcitx/conf/fcitx-classic-ui.config) ${HOME}/.config/fcitx/conf/fcitx-classic-ui.config
+	ln -sfnv $(abspath config/nvim/init.vim) ${HOME}/.config/nvim/init.vim
+	ln -sfnv $(abspath config/polybar) ${HOME}/.config/polybar
 
 .PHONY: install
 install: ### Install packages
