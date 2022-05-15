@@ -40,8 +40,9 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 ibus-daemon -drx
-[ ! -s ~/.mpd/pid ] && type mpd >/dev/null 2>&1 && mpd
+[ ! -s ~/.config/mpd/pid ] && type mpd >/dev/null 2>&1 && mpd
 type xbindkeys >/dev/null 2>&1 && xbindkeys &
 type nm-applet >/dev/null 2>&1 && nm-applet &
 type blueman-applet >/dev/null 2>&1 && blueman-applet &
+type solaar >/dev/null 2>&1 && solaar -w hide &
 exec i3
