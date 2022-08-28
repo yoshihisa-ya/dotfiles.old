@@ -103,6 +103,96 @@ windowid() {
     xwininfo | awk '/Window id/{print$4}'
 }
 alias import-window="import -window \$(windowid)"
+
+function bssh() {
+  ssh -t $@ 'bash --rcfile <(echo -e '$(cat ~/.bashrc|base64)'|base64 -w0)'
+}
+
+function record() {
+  # record terminal log
+  dir=$1/log
+  mkdir -p ${dir}
+
+  # ToDo...
+}
+
+function mkwork() {
+  # Change directory to personal tmp
+  dir=$(whiptail --title "ディレクトリ作成" --inputbox "ディレクトリ名を入力" 10 60 "${HOME}/work/.$(date --iso-8601)" 3>&1 1>&2 2>&3)
+  if [ $? != 0 ]; then
+    return 1
+  fi
+
+  mkdir -p ${dir}
+  unlink ~/work/latest
+  ln -s ${dir} ~/work/latest
+  cd ${dir}
+
+  option=$(whiptail --title "オプション指定" --checklist \
+    "必要なオプションを撰択" 15 60 7 \
+    "script" "ターミナルログを取得する" OFF \
+    "norprompt" "RPROMPTを削除する" OFF \
+    "project" "プロジェクトとして扱う" OFF \
+    "nodelete" "削除不可とする" OFF \
+    "nocow" "CoW を無効とする" OFF \
+    3>&1 1>&2 2>&3)
+
+  # ToDo...
+}
+
+function chwallpaper() {
+  if [[ $1 == "boot" ]]; then
+    feh --bg-scale ~/Sync/wallpaper/b1110b46-80ad-4585-b93c-cf4c550a625e.png --bg-fill ~/Sync/wallpaper/a9db2e1e-bab8-4071-8667-f0f23af9c6ca.png
+  else
+    feh --bg-fill ~/Sync/wallpaper/2ec475b3-173e-4ecb-b594-38bc3ca6e36a.jpg --bg-fill ~/Sync/wallpaper/a9db2e1e-bab8-4071-8667-f0f23af9c6ca.png
+  fi
+}
+
+function swrprompt() {
+  if [ -n "$RPROMPT" ]; then
+    unset RPROMPT
+  else
+    RPROMPT="%{${fg[yellow]}%}[%~]%{${reset_color}%}"
+  fi
+}
+
+function checkip() {
+  curl -s whatismyip.akamai.com -4
+}
+
+function checkweather() {
+  curl -s 'ja.wttr.in/Chofu?format=v2'
+}
+
+function checkcert() {
+  echo | openssl s_client -connect $1:${2:-443} 2>/dev/null | openssl x509 -noout -enddate
+}
+
+function pingtime() {
+  ping $* | ts
+}
+
+function yays(){
+  yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S
+}
+
+function yayr(){
+  yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs -ro yay -Rns
+}
+
+function repos-tmux() {
+    local repo="$(ghq list --full-path | fzf)"
+    [ -z "$repo" ] && return
+    local session="${repo//./_}"
+    session="${session##*/}"
+
+    if [ -z "$TMUX" ]; then
+        tmux new-session -A -s $session -c $repo
+    else
+        tmux new-session -d -s $session -c $repo 2>/dev/null
+        tmux switch-client -t $session
+    fi
+}
 # }}}1
 
 # Prompt {{{1
@@ -218,12 +308,47 @@ function repos() {
         cd ${repo}
     fi
 }
+function works() {
+    local work=$(find ${HOME}/work -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' | peco --query "$LBUFFER")
+    if [ -n ${work} ]; then
+        echo ${work}
+        cd ${work}
+    fi
+}
 
 # Setting Include {{{1
 # --------------------
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
 # }}}1
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit's installer chunk
+
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+
+zinit ice lucid depth"1" blockf
+zinit light yuki-yano/zeno.zsh
+if [[ -n $ZENO_LOADED ]]; then
+  bindkey ' '  zeno-auto-snippet
+  bindkey '^m' zeno-auto-snippet-and-accept-line
+  bindkey '^i' zeno-completion
+fi
