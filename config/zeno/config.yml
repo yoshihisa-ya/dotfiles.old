@@ -23,7 +23,7 @@ snippets:
 
   - name: git status
     keyword: gs
-    snippet: git status --short --branch
+    snippet: git status --branch
 
   - name: git switch
     keyword: gsw
@@ -32,6 +32,10 @@ snippets:
   - name: git commit
     keyword: gc
     snippet: git commit
+
+  - name: git branch -a
+    keyword: gb
+    snippet: git branch -a
 
   - name: git add
     keyword: ga
@@ -47,7 +51,11 @@ snippets:
 
   - name: git diff
     keyword: gd
-    snippet: git diff --stat
+    snippet: git diff
+
+  - name: git log
+    keyword: gl
+    snippet: git --no-pager log --graph --oneline -n 10
 
   - name: git pull
     keyword: gp
