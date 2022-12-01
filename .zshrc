@@ -119,25 +119,41 @@ function record() {
 function mkwork() {
   # Change directory to personal tmp
   dir=$(whiptail --title "ディレクトリ作成" --inputbox "ディレクトリ名を入力" 10 60 "${HOME}/work/.$(date --iso-8601)" 3>&1 1>&2 2>&3)
-  if [ $? != 0 ]; then
-    return 1
-  fi
+  [ $? != 0 ] && return 1
 
   mkdir -p ${dir}
-  unlink ~/work/latest
+  unlink ~/work/latest || :
   ln -s ${dir} ~/work/latest
   cd ${dir}
 
-  option=$(whiptail --title "オプション指定" --checklist \
+  option=$(whiptail --title "オプション指定" --separate-output --checklist \
     "必要なオプションを撰択" 15 60 7 \
     "script" "ターミナルログを取得する" OFF \
     "norprompt" "RPROMPTを削除する" OFF \
     "project" "プロジェクトとして扱う" OFF \
-    "nodelete" "削除不可とする" OFF \
     "nocow" "CoW を無効とする" OFF \
     3>&1 1>&2 2>&3)
 
+  echo $option | while read op; do
+    case $op in
+    "script")
+      echo "Option 1 was selected"
+      ;;
+    "norprompt")
+      echo "Option 2 was selected"
+      ;;
+    "project")
+      echo "Option 3 was selected"
+      ;;
+    "nocow")
+      sudo chattr +C ${dir}
+      ;;
+    esac
+  done
+
+
   # ToDo...
+  # echo $option
 }
 
 function chwallpaper() {
@@ -349,6 +365,5 @@ zinit ice lucid depth"1" blockf
 zinit light yuki-yano/zeno.zsh
 if [[ -n $ZENO_LOADED ]]; then
   bindkey ' '  zeno-auto-snippet
-  bindkey '^m' zeno-auto-snippet-and-accept-line
   bindkey '^i' zeno-completion
 fi
