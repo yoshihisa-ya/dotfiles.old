@@ -36,17 +36,13 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
     unset f
 fi
 
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-fcitx &
-xscreensaver -nosplash &
-cat $HOME/.config/i3/config.base >$HOME/.config/i3/config
-if [ -f "$HOME/sync/dotfiles/config/i3/config.$HOSTNAME" ]; then
-    cat $HOME/sync/dotfiles/config/i3/config.$HOSTNAME >>$HOME/.config/i3/config
-fi
-[ ! -s ~/.mpd/pid ] && type mpd >/dev/null 2>&1 && mpd
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+ibus-daemon -drx
+[ ! -s ~/.config/mpd/pid ] && type mpd >/dev/null 2>&1 && mpd
 type xbindkeys >/dev/null 2>&1 && xbindkeys &
 type nm-applet >/dev/null 2>&1 && nm-applet &
 type blueman-applet >/dev/null 2>&1 && blueman-applet &
+type solaar >/dev/null 2>&1 && solaar -w hide &
 exec i3

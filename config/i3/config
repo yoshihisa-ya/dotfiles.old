@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -36,7 +36,8 @@ bindsym $mod+Return exec xterm
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id "rofi -combi-modi drun,ssh,window -show combi -icon-theme \\"Papirus\\" -show-icons"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -138,24 +139,16 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -165,8 +158,27 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+#bar {
+#        status_command i3status
+#        tray_output       none
+#}
 
-bindsym $mod+q exec --no-startup-id xscreensaver-command --lock
+bindsym $mod+q exec --no-startup-id i3lock -c 000000
+
+bindsym XF86MonBrightnessDown exec sudo light -s sysfs/backlight/intel_backlight -U 5
+bindsym XF86MonBrightnessUp exec sudo light -s sysfs/backlight/intel_backlight -A 5
+bindsym XF86KbdBrightnessUp exec sudo light -s sysfs/leds/smc::kbd_backlight -A 10
+bindsym XF86KbdBrightnessDown exec sudo light -s sysfs/leds/smc::kbd_backlight -U 10
+bindsym XF87AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+exec --no-startup-id redshift-gtk -l 35.650583:139.540667
+exec --no-startup-id "sh -c 'sleep 1; exec bash ~/Sync/screenlayout/dual.sh'"
+exec --no-startup-id "sh -c 'sleep 2; exec bash ~/.config/polybar/launch.sh'"
+exec --no-startup-id "sh -c 'sleep 2; exec feh --bg-scale ~/Sync/wallpaper/b1110b46-80ad-4585-b93c-cf4c550a625e.png --bg-fill ~/Sync/wallpaper/a9db2e1e-bab8-4071-8667-f0f23af9c6ca.png'"
+exec --no-startup-id "sh -c 'sleep 3; picom -b'"
+exec xautolock -detectsleep -time 15 -locker "i3lock -c 000000" -notify 60 -notifier "notify-send -u critical -t 10000 -- 'The screen will lock in 60 seconds.'" -corners +--- -cornerdelay 1 -cornerredelay 10

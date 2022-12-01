@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-export VISUAL="vim"
+export VISUAL="nvim"
 
 # Command Alias
 if [ $OSTYPE == 'linux-gnu' ]; then
@@ -19,11 +19,14 @@ fi
 PS1='[\u@\h \W]\$ '
 
 export PAGER=less
+export EDITOR=nvim
 export LESS='-g -i -M -R -W -x2'
 export TERM=xterm-256color
 export MAKEOBJDIRPREFIX=$HOME/.obj
 
 export ANSIBLE_NOCOWS=1
+
+export BR2_DL_DIR=~/buildroot/download
 
 # Add color to the display of man
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -45,6 +48,7 @@ alias ssh-root='ssh -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/nu
 alias n='mpc next'
 alias p='mpc pause'
 alias xclip='xclip -selection clipboard'
+alias cp='cp --reflink=auto'
 windowid() {
     xwininfo | awk '/Window id/{print$4}'
 }
@@ -106,10 +110,6 @@ if [ -f ~/.bashrc_work ]; then
     . ~/.bashrc_work
 fi
 
-if [ -f /usr/share/git/completion/git-completion.bash ]; then
-    . /usr/share/git/completion/git-completion.bash
-fi
-
 if [ -f /usr/share/git/completion/git-prompt.sh ]; then
     . /usr/share/git/completion/git-prompt.sh
     GIT_PS1_SHOWDIRTYSTATE=true
@@ -119,8 +119,12 @@ if [ -f /usr/share/git/completion/git-prompt.sh ]; then
     PS1='[\u@\h \W]$(__git_ps1)\$ '
 fi
 
-if [ -f /usr/share/doc/mpc/contrib/mpc-completion.bash ]; then
-    . /usr/share/doc/mpc/contrib/mpc-completion.bash
+if [ -f /usr/share/fzf/key-bindings.bash ]; then
+    . /usr/share/fzf/key-bindings.bash
+fi
+
+if [ -f /usr/share/fzf/completion.bash ]; then
+    . /usr/share/fzf/completion.bash
 fi
 
 # formatting PATH
