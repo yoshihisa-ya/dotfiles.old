@@ -71,6 +71,18 @@ snippets:
     context:
       lbuffer: '.+\s'
 
+  - name: awk sum
+    keyword: "awksum"
+    snippet: "| awk '{sum+=$NF{{field}}} END {print sum}'"
+    context:
+      lbuffer: '.+\s'
+
+  - name: awk ave
+    keyword: "awkave"
+    snippet: "| awk '{sum+=$NF{{field}}} END {print sum/NR}'"
+    context:
+      lbuffer: '.+\s'
+
   - name: yay -Syu
     keyword: yayu
     snippet: yay -Syu
